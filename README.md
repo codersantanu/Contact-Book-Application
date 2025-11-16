@@ -15,13 +15,8 @@ The project includes user interaction features, backend APIs, and a clean fronte
 
 •	Frontend: HTML, CSS, JavaScript
 •	Backend: Flask (Python)
-•	Database: SQLite / MySQL / PostgreSQL
+•	Database: MySQL
 
-📦 Deployment
-
-•	Backend hosted on Render
-•	Frontend hosted on Vercel
-•	Environment variables used for secure DB access
 
 📁 How to Run Locally
 
