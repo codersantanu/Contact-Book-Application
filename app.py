@@ -1,16 +1,21 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_mysqldb import MySQL
 import MySQLdb.cursors
+import os
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key_change_this'
+app.secret_key = os.getenv('SECRET_KEY', 'dev-secret-key-change-in-production')
 
 # MySQL Configuration
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_PORT'] = 3307
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'santanu@2006AI'
-app.config['MYSQL_DB'] = 'contact_book'
+app.config['MYSQL_HOST'] = os.getenv('DB_HOST', 'localhost')
+app.config['MYSQL_PORT'] = int(os.getenv('DB_PORT', 3307))
+app.config['MYSQL_USER'] = os.getenv('DB_USER', 'root')
+app.config['MYSQL_PASSWORD'] = os.getenv('DB_PASSWORD')
+app.config['MYSQL_DB'] = os.getenv('DB_NAME', 'contact_book')
 
 mysql = MySQL(app)
 
