@@ -19,13 +19,33 @@ app.config['MYSQL_DB'] = os.getenv('DB_NAME', 'contact_book')
 
 mysql = MySQL(app)
 
+# Test database connection on startup
+def test_db_connection():
+    try:
+        cursor = mysql.connection.cursor()
+        cursor.execute("SELECT 1")
+        cursor.close()
+        print("✅ Database connection successful!")
+        return True
+    except Exception as e:
+        print(f"❌ Database connection failed: {e}")
+        print(f"Host: {app.config['MYSQL_HOST']}")
+        print(f"Port: {app.config['MYSQL_PORT']}")
+        print(f"User: {app.config['MYSQL_USER']}")
+        print(f"Database: {app.config['MYSQL_DB']}")
+        return False
+
 @app.route('/')
 def index():
-    cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cursor.execute("SELECT * FROM contacts ORDER BY name")
-    contacts = cursor.fetchall()
-    cursor.close()
-    return render_template('index.html', contacts=contacts)
+    try:
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute("SELECT * FROM contacts ORDER BY name")
+        contacts = cursor.fetchall()
+        cursor.close()
+        return render_template('index.html', contacts=contacts)
+    except Exception as e:
+        flash(f'Database error: {str(e)}', 'error')
+        return render_template('index.html', contacts=[])
 
 @app.route('/add', methods=['POST'])
 def add_contact():
@@ -75,4 +95,6 @@ def delete_contact():
     return redirect(url_for('index'))
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000,debug=True)
+    with app.app_context():
+        test_db_connection()
+    app.run(host='0.0.0.0', port=5000, debug=True)

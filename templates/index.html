@@ -33,7 +33,7 @@
     <div class="contact-list" id="contactList">
         {% if contacts %}
             {% for contact in contacts %}
-                <div class="contact-card" data-id="{{ contact.id }}" data-name="{{ contact.name }}" data-phone="{{ contact.phone }}" data-email="{{ contact.email|default('') }}"></div>
+                <div class="contact-card" data-id="{{ contact.id }}" data-name="{{ contact.name }}" data-phone="{{ contact.phone }}" data-email="{{ contact.email|default('') }}">
                     <h3>{{ contact.name }}</h3>
                     <p>📞 {{ contact.phone }}</p>
                     {% if contact.email %}
