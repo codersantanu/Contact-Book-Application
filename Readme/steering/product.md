@@ -1,4 +1,4 @@
-# Product Overview
+# App Overview
 
 Contact Book is a web-based contact management application that allows users to store, search, and manage their contacts in one centralized location.
 
