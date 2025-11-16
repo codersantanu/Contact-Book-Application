@@ -73,7 +73,7 @@ def update_contact():
     if contact_id and name and phone:
         cursor = mysql.connection.cursor()
         cursor.execute("UPDATE contacts SET name=%s, phone=%s, email=%s WHERE id=%s", 
-                      (name, phone, email, contact_id))
+                    (name, phone, email, contact_id))
         mysql.connection.commit()
         cursor.close()
         flash('Contact updated successfully!', 'success')
