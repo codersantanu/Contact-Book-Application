@@ -9,8 +9,6 @@ contact-book/
 │   └── styles.css           # All CSS styling
 ├── templates/
 │   └── index.html           # Single-page application template
-└── .kiro/
-    └── steering/            # AI assistant guidance documents
 ```
 
 ## Architecture Patterns
